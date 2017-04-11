@@ -6,7 +6,7 @@
 
   struct node {
     int priority;
-    int item;
+    void *item;
     Node *next_node;
   };
 
@@ -15,7 +15,7 @@
   };
 
 PriorityQueue* create_priority_queue();
-void enqueue(PriorityQueue *pq, int item, int priority);
+void enqueue(PriorityQueue *pq, void *item, int priority);
 Node dequeue(PriorityQueue *pq);
 int is_empty(PriorityQueue *pq);
 int maximum(PriorityQueue *pq);

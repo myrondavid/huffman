@@ -10,7 +10,7 @@ int is_empty(PriorityQueue *pq){
     return(pq->first == NULL);
 }
 
-void enqueue(PriorityQueue *pq, int item, int priority){
+void enqueue(PriorityQueue *pq, void *item, int priority);{
     Node *new = (Node*) malloc(sizeof(Node));
     new->item = item;
     new->priority = priority;
