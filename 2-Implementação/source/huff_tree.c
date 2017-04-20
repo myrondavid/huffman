@@ -3,14 +3,16 @@
 #include "../header/huff_tree.h"
 #include "../header/priority_queue.h"
 
-Node* queue_to_tree(PriorityQueue* pq) {
+//arrumar esta função
+Node* queue_to_tree(Heap* heap) {
+
   int i = 0;
   Node* bt = NULL;
 
-  while(get_queue_size(pq) > 0){
+  while(get_size(heap) > 0){
 
     if(i%2 == 0){
-      if(i != 0) enqueue(pq, bt); //arrumar isso aqui
+      if(i != 0) enqueue(heap, bt);
       bt = create_node('*', 0);
       bt->left = dequeue(heap);
       bt->frequency += bt->left->frequency;
@@ -25,6 +27,7 @@ Node* queue_to_tree(PriorityQueue* pq) {
   }
 
   return bt;
+
 }
 
 Node* create_tree_node(char item, Node *left, Node *right) {

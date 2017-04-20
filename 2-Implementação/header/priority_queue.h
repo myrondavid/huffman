@@ -2,20 +2,15 @@
 #define PRIORITY_QUEUE_H
 
   typedef struct priority_queue PriorityQueue;
-  typedef struct node Node;
+  //typedef struct node Node;
 
-  struct node {
-    int priority;
-    void *item;
-    Node *next_node;
-  };
 
   struct priority_queue {
     Node *first;
   };
 
 PriorityQueue* create_priority_queue();
-void enqueue(PriorityQueue *pq, void *item, int priority);
+void enqueue(PriorityQueue *pq, int item, int priority);
 Node dequeue(PriorityQueue *pq);
 int is_empty(PriorityQueue *pq);
 int maximum(PriorityQueue *pq);

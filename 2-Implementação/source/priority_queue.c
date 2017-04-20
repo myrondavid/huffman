@@ -1,16 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "priority_queue.h"
+#include "../header/huff_tree.h"
+#include "../header/priority_queue.h"
 
 PriorityQueue* create_priority_queue(){
-
+  PriorityQueue *pq = (PriorityQueue*) malloc(sizeof(PriorityQueue));
+  pq->first = null; 
+  return pq;
 }
 
 int is_empty(PriorityQueue *pq){
     return(pq->first == NULL);
 }
 
-void enqueue(PriorityQueue *pq, void *item, int priority);{
+void enqueue(PriorityQueue *pq, unsigned char item, int priority){
     Node *new = (Node*) malloc(sizeof(Node));
     new->item = item;
     new->priority = priority;
