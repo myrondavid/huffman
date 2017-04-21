@@ -5,7 +5,7 @@
 
 PriorityQueue* create_priority_queue(){
   PriorityQueue *pq = (PriorityQueue*) malloc(sizeof(PriorityQueue));
-  pq->first = null; 
+  pq->first = NULL; 
   return pq;
 }
 
@@ -13,17 +13,17 @@ int is_empty(PriorityQueue *pq){
     return(pq->first == NULL);
 }
 
-void enqueue(PriorityQueue *pq, unsigned char item, int priority){
-    Node *new = (Node*) malloc(sizeof(Node));
-    new->item = item;
-    new->priority = priority;
-    if(is_empty(pq) || (priority > pq->first->priority)){
+void enqueue(PriorityQueue *pq, Node *n){
+    Qnode *new = (Qnode*) malloc(sizeof(Qnode));
+    new->data = n;
+    new->next_node = NULL;
+    if(is_empty(pq) || (n->frequency > pq->first->data->frequency)){
         new->next_node = pq->first;
         pq->first = new;
     }
     else{
-        Node *current = pq->first;
-        while((current->next_node != NULL) && (current->next_node->priority > priority)){
+        Qnode *current = pq->first;
+        while((current->next_node != NULL) && (current->data->frequency > n->frequency)){
             current = current->next_node;
         }
         new->next_node = current->next_node;
@@ -31,12 +31,12 @@ void enqueue(PriorityQueue *pq, unsigned char item, int priority){
     }
 }
 
-Node dequeue(PriorityQueue *pq){
+Node* dequeue(PriorityQueue *pq){
     if(!is_empty(pq)){
-        Node *current = pq->first;
+        Qnode *current = pq->first;
         pq->first = pq->first->next_node;
         current->next_node = NULL;
-        return current;
+        return current->data;
     }
     else{
         return NULL;
@@ -44,13 +44,29 @@ Node dequeue(PriorityQueue *pq){
 }
 
 
-int maximum(PriorityQueue *pq){
+Node* maximum(PriorityQueue *pq){
     if(!is_empty(pq))
-        return pq->first->item;
+        return pq->first->data;
     else
-        return -1;
+        return NULL;
 }
 
 void print_priority_queue(PriorityQueue *pq){
+  Qnode *new = (Qnode*) malloc(sizeof(Qnode));
+  new = pq->first;
+  while(new != NULL){
+    printf("%c\n", new->data->item);
+    new = new->next_node;
+  }
+}
 
+int get_size(PriorityQueue *pq){
+  int size = 0;
+  Qnode *new = (Qnode*) malloc(sizeof(Qnode));
+  new = pq->first;
+  while(new != NULL){
+    size++;
+    new = new->next_node;
+  }
+  return size;
 }

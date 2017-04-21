@@ -4,15 +4,15 @@
 #include "../header/priority_queue.h"
 
 //arrumar esta função
-Node* queue_to_tree(Heap* heap) {
+Node* queue_to_tree(PriorityQueue* pq) {
 
   int i = 0;
   Node* bt = NULL;
 
-  while(get_size(heap) > 0){
+  while(get_size(pq) > 0){
 
     if(i%2 == 0){
-      if(i != 0) enqueue(heap, bt);
+      if(i != 0) enqueue(pq, bt->item, bt->priority);
       bt = create_node('*', 0);
       bt->left = dequeue(heap);
       bt->frequency += bt->left->frequency;
