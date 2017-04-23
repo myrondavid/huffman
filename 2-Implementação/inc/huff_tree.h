@@ -1,20 +1,22 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include "priority_queue.h"
 
 #ifndef HUFF_TREE_H
 #define HUFF_TREE_H
 
+
+
   typedef struct node Node;
   struct node{
-    unsigned char item;
+    char item;
     int frequency;
+    Node *next;
     Node *left;
     Node *right;
   };
 
-  /* Creates a huffman tree based on a priority queue
-   * Requires a queue
+  /* Creates a huffman tree based on a heap
+   * Requires a min heap
    * Returns a huffman tree.
    */
   Node* queue_to_tree(PriorityQueue* pq);
