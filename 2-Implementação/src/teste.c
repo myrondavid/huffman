@@ -22,11 +22,20 @@ void main(){
   pq = enqueue(pq, bt5);
 
   dq->first = dequeue(pq);
+
+  
+
   print_priority_queue(pq);
   printf("Size = %d\n", get_size(pq));
   printf("Is empty? %d\n", is_empty(pq));
   printf("\n");
+
   print_priority_queue(dq);
   printf("Size = %d\n", get_size(dq));
   printf("Is empty? %d\n", is_empty(dq));
+
+  Node *tree = queue_to_tree(pq);
+  printf("Tree Size = %d\n", calculate_tree_size(tree, 0));
+  print_tree(tree);
+  printf("\n");
 }
