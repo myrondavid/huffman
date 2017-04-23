@@ -33,6 +33,7 @@ Node* dequeue(PriorityQueue *pq) {
   if (!is_empty(pq)) {
     Node *dequeued = pq->first;
     pq->first = pq->first->next;
+    dequeued->next = NULL;
     return dequeued;
   } else {
     return NULL;

@@ -6,6 +6,8 @@
 
 void main(){
   PriorityQueue *pq = create_priority_queue();
+  PriorityQueue *dq = create_priority_queue();
+
 
   Node *bt = create_node('a', 10);
   Node *bt2 = create_node('b', 5);
@@ -19,9 +21,12 @@ void main(){
   pq = enqueue(pq, bt4);
   pq = enqueue(pq, bt5);
 
-  dequeue(pq);
+  dq->first = dequeue(pq);
   print_priority_queue(pq);
   printf("Size = %d\n", get_size(pq));
   printf("Is empty? %d\n", is_empty(pq));
   printf("\n");
+  print_priority_queue(dq);
+  printf("Size = %d\n", get_size(dq));
+  printf("Is empty? %d\n", is_empty(dq));
 }
