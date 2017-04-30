@@ -1,25 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../header/compress.h"
-#include "../header/decompress.h"
+#include "../inc/compress.h"
+#include "../inc/decompress.h"
 
-void help() {
-  printf("Huffman Help\n\n");
-
-  printf("Usage: huffman [options] [source_filename_path] [destination_filename_path]\n");
-  printf("Uso: huffman [options] [arquivo_de_origem] [arquivo_de_destino]\n\n");
-
-  printf("Options:\n");
-  printf("%s\n", "-c: Compress the source file to the destination file");
-  printf("%s\n", "-d: Decompress the source file to the destination file");
-
-  exit(0);
-}
+void help();
 
 int main(int argc, char const *argv[]) {
-  FILE *file, *dest_file;
-
+  FILE *file;
   char *src_filename, *dest_filename, option[3];
   unsigned char *file_content;
   long int file_size;
@@ -47,8 +35,7 @@ int main(int argc, char const *argv[]) {
       exit(1);
     }
 
-    file = fopen(src_filename, "rb");
-    dest_file = fopen(dest_filename, "wb+");
+    file = fopen(src_filename, "r");
 
     if(file == NULL) {
       printf("The source file does not exist!\n");
@@ -59,16 +46,29 @@ int main(int argc, char const *argv[]) {
     file_size = ftell(file);                              /* Return the position of the pointer on the file */
     rewind(file);                                         /* Rollback the pointer to the beginning of thee file */
     file_content = (unsigned char*)malloc((file_size + 1) * (sizeof(unsigned char)));
-    //fread(file_content, sizeof(unsigned char), file_size, file);   /* Read the content of the file */
+    fread(file_content, sizeof(char), file_size, file);   /* Read the content of the file */
     fclose(file);
     file_content[file_size] = 0;
   }
 
   if(strcmp(option, "-c") == 0){
-    compress(file, file_size, dest_file);
+    compress(file_content, file_size, dest_filename);
   } else {
     //decompress(file_content, file_size, dest_filename);
   }
 
   return 0;
 }
+
+void help() {
+  printf("Huffman Help\n\n");
+
+  printf("Usage: huffman [options] [source_filename_path] [destination_filename_path]\n\n");
+
+  printf("Options:\n");
+  printf("%s\n", "-c: Compress the source file to the destination file");
+  printf("%s\n", "-d: Decompress the source file to the destination file");
+
+  exit(0);
+}
+

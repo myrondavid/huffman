@@ -1,5 +1,5 @@
-OBJS = source/main.c source/huff_tree.c source/priority_queue.c source/table.c source/compress.c
-DEPS = header/huff_tree.h header/priority_queue.h header/table.h header/compress.h 
+OBJS = src/main.c src/huff_tree.c src/priority_queue.c src/table.c src/compress.c
+DEPS = inc/huff_tree.h inc/priority_queue.h inc/table.h inc/compress.h 
 
 
 compile:

@@ -27,7 +27,7 @@ Node* queue_to_tree(PriorityQueue* pq) {
 Node* create_tree_node(char item, Node *left, Node *right) {
   Node *new = (Node *) malloc(sizeof(Node));
   new->item = item;
-  new->next = NULL
+  new->next = NULL;
   new->left = left;
   new->right = right;
   return new;
