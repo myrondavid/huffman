@@ -54,7 +54,7 @@ int main(int argc, char const *argv[]) {
   if(strcmp(option, "-c") == 0){
     compress(file_content, file_size, dest_filename);
   } else {
-    //decompress(file_content, file_size, dest_filename);
+    decompress(file_content, file_size, dest_filename);
   }
 
   return 0;
