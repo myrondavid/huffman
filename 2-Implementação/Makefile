@@ -10,3 +10,5 @@ test:
 
 clean:
 	rm -f main
+
+# gcc src/main.c src/huff_tree.c src/priority_queue.c src/table.c src/compress.c src/decompress.c inc/huff_tree.h inc/priority_queue.h inc/table.h inc/compress.h inc/decompress.h  -o main -lm
