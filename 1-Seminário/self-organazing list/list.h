@@ -17,6 +17,8 @@
 
   Node* search_movetofront(Node *first, int item);
 
+  Node* search_transpose(Node *first, int item);
+
   Node* remove_node(Node *first, int item);
 
   int is_empty(Node *first);

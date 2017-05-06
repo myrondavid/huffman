@@ -27,13 +27,30 @@ Node* search(Node *first, int item) {
 
 Node* search_movetofront(Node *first, int item) {
   Node *node;
-  Node *prev;
   for(node = first; node->next_node != NULL; node = node->next_node) {
     if(node->item == item){
       node->next_node->prev_node = node->prev_node;
       node->prev_node = node->next_node;
       node->next_node = first;
       node->prev_node = NULL;
+      return node;
+    } 
+  }
+  return NULL;
+}
+
+Node* search_transpose(Node *first, int item) {
+  Node *node;
+  Node *aux;
+  for(node = first; node->next_node != NULL; node = node->next_node) {
+    if(node->item == item){
+      aux = node->prev_node;
+      node->prev_node = node->prev_node->prev_node;
+      node->prev_node->next_node = node;
+      aux->next_node = node->next_node;
+      aux->next_node->prev_node = aux;
+      aux->prev_node = node;
+      node->next = aux;
       return node;
     } 
   }
