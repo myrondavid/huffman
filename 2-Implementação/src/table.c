@@ -14,7 +14,7 @@ struct table{
   BitNode *last;
 };
 
-// Allocates an empty table, recieves the size of the table (the table is an array of lists)
+
 Table *create_table(int size){
   int i;
   Table *table = (Table*)malloc(size*sizeof(Table));
@@ -26,8 +26,7 @@ Table *create_table(int size){
 
 }
 
-// Allocates BitNodes that are used in the tables
-// Recieves a char, which is the value of the BitNode
+
 BitNode *create_bit_node(char item){
 
   BitNode *newNode = (BitNode*)malloc(sizeof(BitNode));
@@ -37,8 +36,7 @@ BitNode *create_bit_node(char item){
 
 }
 
-// Adds BitNodes to a list
-// Recieves the table, the position of the list in the table and the char to be added
+
 void add_to_list(Table *list, unsigned char position, char bit){
 
   BitNode *newNode = create_bit_node(bit);
@@ -53,8 +51,7 @@ void add_to_list(Table *list, unsigned char position, char bit){
 
 }
 
-// Function that sets the table of "binaries" of each char present in the file
-// Recieves a binary tree, a table, the next character in the code(that should be an empty string) and a code(that should also be an empty string)
+
 void fill_table(Node *bt, Table *table, char *next_binary, char *code){
   strcat(code, next_binary);
   if(is_leaf(bt)){
@@ -72,53 +69,44 @@ void fill_table(Node *bt, Table *table, char *next_binary, char *code){
   return;
 }
 
-// Writes the coded chars in the destination file and returns the trash size
-// Recieves the origin file content, the origin file size, a pointer to the destination file and the table with the "binaries" of each char in the origin file
-int write_in_file(unsigned char *file_content, size_t file_size, FILE *dest_file, Table *table){
 
+int write_in_file(unsigned char *file_content, size_t file_size, FILE *dest_file, Table *table){
   int i, j = 7;
   BitNode *current = NULL;
   unsigned char byte = 0;
-
+  //percorre a tabela
   for(i = 0; i < file_size; i++){
-
     current = table[file_content[i]].first;
-
+    
     for(; j >= 0; j--){
-
       if(current->bit == '1'){
-        (byte |= 1<<j);
+        (byte |= 1<<j); //seta o byte percorrendo a lista de bits na tabela
       }
-
-      if(current->next == NULL){
+      if(current->next == NULL){ //se chegar no final da lista
         if(i == file_size-1){
-          putc(byte, dest_file);
+          putc(byte, dest_file);  //caso seja o final do arquivo, escreve o byte e volta pro primeiro for
           break;
         }
         else if(j == 0){
-          putc(byte, dest_file);
+          putc(byte, dest_file); //caso tenha acabado o byte, volta o contador para que um novo byte seja preenchido
           j = 8;
           byte = 0;
         }
-        j--;
+        j--;  //vai decrescendo o contador do byte atual
         break;
       }
-
-      current = current->next;
-
-      if(j == 0){
+      current = current->next; //avança a posição da lista
+      if(j == 0){ //caso tenha acabado o tamanho do byte atual, zera o contador e volta o contador do byte para um novo ser preenchido
         putc(byte, dest_file);
         j = 8;
         byte = 0;
-
       }
     }
   }
-
-  return j;
+  return j; //o que fica no contador é o tamanho do lixo
 }
 
-// Test function to print huff binary table with the huff binaries each char in the file
+
 void print_table(Table *table, int size){
   int i;
   BitNode *second;

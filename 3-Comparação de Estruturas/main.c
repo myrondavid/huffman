@@ -54,7 +54,7 @@ int main() {
 
   generate_csv_file(searches, comp_list, comp_bst);
 
-  // TODO free structures
+
 
   return 0;
 }

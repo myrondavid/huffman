@@ -54,6 +54,7 @@ int dequeue(PriorityQueue *pq) {
 
 int maximum(PriorityQueue *pq) {
   if(!is_empty(pq)) {
+    //return 0;
     return pq->first->item;
   } else {
     return -1;
